@@ -64,7 +64,9 @@ const DashboardShared = (() => {
             try {
                 const res = await fetch(API_BASE_URL + '/api/orders');
                 if (res.ok) {
-                    cachedOrders = await res.json();
+                    const data = await res.json();
+                    // Handle both array response and { success, orders } object response
+                    cachedOrders = Array.isArray(data) ? data : (data.orders || []);
                     callback();
                 }
             } catch (e) {
