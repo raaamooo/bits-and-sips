@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory — Bites & Sips Dashboard</title>
+    <meta name="description" content="Inventory management dashboard for Bites & Sips. Track ingredient availability and sync with the main menu.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="inventory-view">
+    <!-- Top Bar -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <span class="topbar-title">Inventory</span>
+        </div>
+        <div class="topbar-right">
+            <div id="inv-counts" class="inv-counts"></div>
+            <button class="topbar-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Controls Bar -->
+    <section class="inv-controls">
+        <div class="inv-controls-row">
+            <!-- Search -->
+            <div class="inv-search-group">
+                <div class="mgr-search-wrap">
+                    <i class="fas fa-search mgr-search-icon"></i>
+                    <input type="text" id="inv-search" class="mgr-input" placeholder="Search ingredients…">
+                </div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="inv-filter-group">
+                <button class="inv-filter-btn active" data-filter="all">All</button>
+                <button class="inv-filter-btn" data-filter="available">Available</button>
+                <button class="inv-filter-btn" data-filter="out">Out of Stock</button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="inv-action-group">
+                <button class="action-btn secondary" id="inv-add-btn">
+                    <i class="fas fa-plus"></i> Add Ingredient
+                </button>
+                <button class="action-btn secondary inv-reset" id="inv-reset-btn">
+                    <i class="fas fa-undo"></i> Mark All Available
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inventory Grid -->
+    <main class="page-content inv-content">
+        <div id="inv-grid" class="inv-grid"></div>
+    </main>
+
+    <!-- Add Ingredient Modal Overlay -->
+    <div class="inv-modal-overlay" id="inv-modal-overlay"></div>
+    <aside class="inv-modal" id="inv-modal">
+        <div class="inv-modal-header">
+            <span class="inv-modal-title">Add Ingredient</span>
+            <button class="topbar-btn" id="inv-modal-close" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="inv-modal-body">
+            <label class="inv-modal-label" for="inv-new-name">Ingredient Name</label>
+            <input type="text" id="inv-new-name" class="mgr-input inv-modal-input" placeholder="e.g. Tahini">
+
+            <label class="inv-modal-label">Link to Menu Items</label>
+            <div id="inv-items-checklist" class="inv-checklist"></div>
+        </div>
+        <div class="inv-modal-footer">
+            <button class="action-btn primary" id="inv-modal-save">
+                <i class="fas fa-check"></i> Add Ingredient
+            </button>
+        </div>
+    </aside>
+
+    <script src="js/shared.js"></script>
+    <script src="js/inventory-data.js"></script>
+    <script src="js/inventory.js"></script>
+</body>
+</html>

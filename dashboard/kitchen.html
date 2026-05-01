@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen — Bites & Sips Dashboard</title>
+    <meta name="description" content="Kitchen dashboard for Bites & Sips. View orders to prepare and notify waiters when ready.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="kitchen-view">
+    <!-- Top Bar -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <span class="topbar-title">Kitchen</span>
+            <span class="topbar-badge" id="kitchen-count">0</span>
+        </div>
+        <div class="topbar-right">
+            <button class="topbar-btn" id="sound-toggle" aria-label="Toggle sound" title="Toggle notification sound">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <button class="topbar-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state">
+            <div class="empty-state-icon"><i class="fas fa-fire-burner"></i></div>
+            <h3>No orders in kitchen</h3>
+            <p>Orders sent by the cashier will appear here.</p>
+        </div>
+
+        <!-- Orders Grid -->
+        <div id="orders-grid" class="orders-grid kitchen-grid"></div>
+    </main>
+
+    <script src="js/shared.js"></script>
+    <script src="js/kitchen.js"></script>
+</body>
+</html>

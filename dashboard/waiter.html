@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waiter — Bites & Sips Dashboard</title>
+    <meta name="description" content="Waiter dashboard for Bites & Sips. View orders ready for delivery and mark them as completed.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="waiter-view">
+    <!-- Top Bar -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <span class="topbar-title">Waiter</span>
+            <span class="topbar-badge" id="waiter-count">0</span>
+        </div>
+        <div class="topbar-right">
+            <button class="topbar-btn" id="sound-toggle" aria-label="Toggle sound" title="Toggle notification sound">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <button class="topbar-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state">
+            <div class="empty-state-icon"><i class="fas fa-bell-concierge"></i></div>
+            <h3>No orders ready for delivery</h3>
+            <p>Orders marked ready by the kitchen will appear here.</p>
+        </div>
+
+        <!-- Orders Grid -->
+        <div id="orders-grid" class="orders-grid waiter-grid"></div>
+    </main>
+
+    <script src="js/shared.js"></script>
+    <script src="js/waiter.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bites & Sips | Interactive Egyptian Menu</title>
+    <meta name="description" content="Discover authentic Egyptian cuisine with our interactive menu and recommendation game. Koshari, Molokhia, and more!">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Table Badge -->
+    <div id="table-badge" class="table-badge">Walk-in</div>
+
+    <!-- Floating Theme Toggle -->
+    <button id="theme-toggle" class="floating-theme-btn" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+
+    <!-- Floating Order Link -->
+    <a href="#order" class="floating-order-btn" id="floating-order-link" aria-label="View your order">
+        <i class="fas fa-receipt"></i>
+        <span id="order-count-badge" class="order-badge hidden">0</span>
+    </a>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="logo-centered">
+                Bites & Sips
+            </div>
+            <div class="hero-content">
+                <h1>Taste the Magic of Egypt</h1>
+                <p>Authentic flavors, modern vibes. Find your perfect bite today.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#menu" class="btn btn-primary">Explore Menu</a>
+                    <a href="#game" class="btn btn-secondary">Play With Us</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="menu-section">
+            <h2 class="section-title">Our Menu</h2>
+            
+            <div class="menu-category">
+                <h3>Food</h3>
+                <div class="menu-grid" id="food-grid"></div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Drinks</h3>
+                <div class="menu-grid" id="drinks-grid"></div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Desserts</h3>
+                <div class="menu-grid" id="desserts-grid"></div>
+            </div>
+        </section>
+
+        <section id="game" class="game-section">
+            <div class="game-container">
+                <h2 class="section-title">Play With Us</h2>
+                <p>Not sure what to order? Let us recommend something!</p>
+                <div id="quiz-container" class="quiz-card">
+                    <button id="start-game" class="btn btn-secondary">Find My Craving</button>
+
+                    <div id="game-ui-header" class="hidden">
+                        <button id="back-btn" class="icon-btn" aria-label="Go back"><i class="fas fa-arrow-left"></i></button>
+                        <div class="progress-container">
+                            <span id="progress-text">Question 1 of 6</span>
+                            <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+                        </div>
+                    </div>
+
+                    <div id="question-area" class="hidden">
+                        <h3 id="question-text"></h3>
+                        <div id="options-area" class="options-grid"></div>
+                    </div>
+
+                    <div id="result-area" class="hidden">
+                        <h3 class="result-headline">Your Perfect Match</h3>
+                        <div class="match-badge hidden" id="match-accuracy">100% Match</div>
+                        
+                        <div id="recommended-item" class="menu-card recommended-card main-match"></div>
+                        
+                        <div class="runner-ups-section hidden" id="runner-ups-section">
+                            <h4>You might also love</h4>
+                            <div class="runner-ups-grid" id="runner-ups-grid"></div>
+                        </div>
+                        
+                        <div class="result-actions" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+                            <button id="restart-game" class="btn btn-outline">Play Again</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ YOUR ORDER SECTION ═══ -->
+        <section id="order" class="order-section">
+            <h2 class="section-title">Your Order</h2>
+
+            <!-- Confirmation Message (outside filled state so it persists) -->
+            <div id="order-confirmation" class="order-confirmation hidden"></div>
+
+            <!-- Empty State -->
+            <div id="order-empty-state" class="order-empty">
+                <i class="fas fa-shopping-bag order-empty-icon"></i>
+                <h3>Your order is empty</h3>
+                <p>Browse our menu and add items to get started!</p>
+                <a href="#menu" class="btn btn-outline">Browse Menu</a>
+            </div>
+
+            <!-- Filled State -->
+            <div id="order-filled-state" class="order-form-wrapper hidden">
+                <div class="order-grid">
+                    <!-- Left Column: Items + Form -->
+                    <div class="order-left">
+                        <!-- Order Items -->
+                        <div class="order-card">
+                            <h3 class="order-card-title"><i class="fas fa-list"></i> Items</h3>
+                            <div id="order-items-list" class="order-items-list"></div>
+                            <div class="order-subtotal-row">
+                                <span>Subtotal</span>
+                                <span id="order-subtotal-value" class="order-subtotal-amount">0 EGP</span>
+                            </div>
+                        </div>
+
+                        <!-- Customer Name -->
+                        <div class="order-card">
+                            <label for="customer-name" class="order-label">Your Name <span class="required-star">*</span></label>
+                            <input type="text" id="customer-name" class="order-input" placeholder="Enter your name" required>
+                        </div>
+
+                        <!-- Notes -->
+                        <div class="order-card">
+                            <label for="order-notes" class="order-label">Notes</label>
+                            <textarea id="order-notes" class="order-textarea" placeholder="Any changes or special requests for your order" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Payment + Tip + Summary -->
+                    <div class="order-right">
+                        <!-- Payment Method -->
+                        <div class="order-card">
+                            <h3 class="order-card-title">Payment Method</h3>
+                            <div class="toggle-group">
+                                <button class="toggle-btn payment-option" data-value="cash">
+                                    <i class="fas fa-money-bill-wave"></i> Cash
+                                </button>
+                                <button class="toggle-btn payment-option" data-value="visa">
+                                    <i class="fas fa-credit-card"></i> Visa
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tip Selection -->
+                        <div class="order-card">
+                            <h3 class="order-card-title">Add a Tip</h3>
+                            <div class="toggle-group tip-group">
+                                <button class="toggle-btn tip-option" data-value="0">No Tip</button>
+                                <button class="toggle-btn tip-option" data-value="10">10%</button>
+                                <button class="toggle-btn tip-option" data-value="15">15%</button>
+                                <button class="toggle-btn tip-option" data-value="20">20%</button>
+                            </div>
+                            <div class="tip-display">
+                                Tip amount: <span id="tip-amount-display">0 EGP</span>
+                            </div>
+                        </div>
+
+                        <!-- Order Summary -->
+                        <div class="order-card order-summary-card">
+                            <h3 class="order-card-title">Order Summary</h3>
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="summary-subtotal">0 EGP</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Tip</span>
+                                <span id="summary-tip">0 EGP</span>
+                            </div>
+                            <div class="summary-row summary-grand">
+                                <span>Grand Total</span>
+                                <span id="summary-grand">0 EGP</span>
+                            </div>
+                        </div>
+
+                        <!-- Error Message -->
+                        <div id="order-error" class="order-error hidden"></div>
+
+                        <!-- Place Order Button -->
+                        <button id="place-order-btn" class="btn btn-primary place-order-btn">
+                            <i class="fas fa-paper-plane"></i> Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Bites & Sips</h3>
+                <p>Authentic Egyptian Eats.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#game">Game</a></li>
+                    <li><a href="#order">Your Order</a></li>
+                    <li><a href="#footer">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Visit Us</h4>
+                <p>12 Tahrir Street, Cairo, Egypt</p>
+                <p>Phone: +20 123 456 7890</p>
+                <p>Hours: 10:00 AM - 12:00 AM</p>
+            </div>
+            <div class="footer-socials">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Bites & Sips. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/menu-data.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/order.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Overview — Bites & Sips Dashboard</title>
+    <meta name="description" content="Manager overview dashboard for Bites & Sips. Track all orders, view live stats, and manage the restaurant workflow.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="manager-view">
+    <!-- Top Bar -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <span class="topbar-title">Manager Overview</span>
+        </div>
+        <div class="topbar-right">
+            <span class="mgr-last-updated" id="last-updated">Updated just now</span>
+            <button class="topbar-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Summary Bar -->
+    <section class="mgr-summary-bar" id="summary-bar">
+        <div class="mgr-stat-card" data-status="pending">
+            <div class="mgr-stat-value" id="stat-pending">0</div>
+            <div class="mgr-stat-label">Pending</div>
+        </div>
+        <div class="mgr-stat-card" data-status="in-kitchen">
+            <div class="mgr-stat-value" id="stat-kitchen">0</div>
+            <div class="mgr-stat-label">In Kitchen</div>
+        </div>
+        <div class="mgr-stat-card" data-status="ready">
+            <div class="mgr-stat-value" id="stat-ready">0</div>
+            <div class="mgr-stat-label">Ready</div>
+        </div>
+        <div class="mgr-stat-card" data-status="completed">
+            <div class="mgr-stat-value" id="stat-completed">0</div>
+            <div class="mgr-stat-label">Completed</div>
+        </div>
+        <div class="mgr-stat-card" data-status="total">
+            <div class="mgr-stat-value" id="stat-total">0</div>
+            <div class="mgr-stat-label">Total Today</div>
+        </div>
+    </section>
+
+    <!-- Filters & Search Bar -->
+    <section class="mgr-filters" id="filters-bar">
+        <div class="mgr-filters-row">
+            <div class="mgr-filter-group">
+                <label for="filter-status">Status</label>
+                <select id="filter-status" class="mgr-select">
+                    <option value="all">All</option>
+                    <option value="pending">Pending</option>
+                    <option value="in-kitchen">In Kitchen</option>
+                    <option value="ready">Ready</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            <div class="mgr-filter-group">
+                <label for="filter-table">Table</label>
+                <select id="filter-table" class="mgr-select">
+                    <option value="all">All Tables</option>
+                </select>
+            </div>
+            <div class="mgr-filter-group">
+                <label for="filter-payment">Payment</label>
+                <select id="filter-payment" class="mgr-select">
+                    <option value="all">All</option>
+                    <option value="cash">Cash</option>
+                    <option value="visa">Visa</option>
+                </select>
+            </div>
+            <div class="mgr-filter-group mgr-search-group">
+                <label for="filter-search">Search</label>
+                <div class="mgr-search-wrap">
+                    <i class="fas fa-search mgr-search-icon"></i>
+                    <input type="text" id="filter-search" class="mgr-input" placeholder="Name or order #">
+                </div>
+            </div>
+            <div class="mgr-filter-group mgr-archive-group">
+                <button class="action-btn secondary mgr-archive-btn" id="archive-btn">
+                    <i class="fas fa-archive"></i> Archive Completed
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+    <main class="page-content mgr-content">
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state">
+            <div class="empty-state-icon"><i class="fas fa-clipboard-list"></i></div>
+            <h3>No orders yet</h3>
+            <p>Orders placed by customers will appear here.</p>
+        </div>
+
+        <!-- Orders List -->
+        <div id="orders-list" class="mgr-orders-list"></div>
+    </main>
+
+    <!-- Detail Panel Overlay -->
+    <div class="mgr-panel-overlay" id="panel-overlay"></div>
+    <aside class="mgr-detail-panel" id="detail-panel">
+        <div class="mgr-panel-header">
+            <span class="mgr-panel-title" id="panel-title">Order Details</span>
+            <button class="topbar-btn mgr-panel-close" id="panel-close" aria-label="Close panel">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mgr-panel-body" id="panel-body"></div>
+    </aside>
+
+    <script src="js/shared.js"></script>
+    <script src="js/manager.js"></script>
+</body>
+</html>

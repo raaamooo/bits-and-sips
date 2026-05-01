@@ -1,0 +1,98 @@
+/* Mobile First / Breakpoints */
+
+/* Base is mobile (up to 480px target) */
+
+/* Small Tablets / Large Phones */
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: var(--nav-bg);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        padding: 2rem 0;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .menu-grid {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Order section responsive */
+    .order-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tip-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .toggle-group {
+        flex-direction: column;
+    }
+
+    .toggle-group .toggle-btn {
+        flex: unset;
+    }
+
+    .floating-order-btn,
+    .floating-theme-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+
+    .floating-order-btn {
+        bottom: 80px;
+        right: 16px;
+    }
+
+    .floating-theme-btn {
+        bottom: 20px;
+        right: 16px;
+    }
+}
+
+/* For Extra Small Screens (360px - 414px specifically tested via fluid sizing) */
+@media (max-width: 414px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+    .btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .menu-category h3 {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashier — Bites & Sips Dashboard</title>
+    <meta name="description" content="Cashier dashboard for Bites & Sips. View incoming orders, send to kitchen, and print cash receipts.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <span class="topbar-title">Cashier</span>
+            <span class="topbar-badge" id="pending-count">0</span>
+        </div>
+        <div class="topbar-right">
+            <button class="topbar-btn" id="sound-toggle" aria-label="Toggle sound" title="Toggle notification sound">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <button class="topbar-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state">
+            <div class="empty-state-icon"><i class="fas fa-check-circle"></i></div>
+            <h3>No pending orders</h3>
+            <p>New orders will appear here automatically.</p>
+        </div>
+
+        <!-- Orders Grid -->
+        <div id="orders-grid" class="orders-grid"></div>
+    </main>
+
+    <!-- Print Receipt Container (hidden, used for printing) -->
+    <div id="print-receipt" class="print-receipt"></div>
+
+    <script src="js/shared.js"></script>
+    <script src="js/cashier.js"></script>
+</body>
+</html>

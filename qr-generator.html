@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bites & Sips | QR Code Generator</title>
+    <meta name="description" content="Generate QR codes for each table at Bites & Sips. Print and place them for easy ordering.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/qr-generator.css">
+</head>
+<body>
+    <!-- Floating Theme Toggle -->
+    <button id="theme-toggle" class="floating-theme-btn" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+
+    <main>
+        <section class="qr-hero">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Menu</a>
+            <h1>QR Code Generator</h1>
+            <p>Generate unique QR codes for each table. Customers scan to open the menu for their table.</p>
+        </section>
+
+        <section class="qr-config">
+            <div class="config-card">
+                <div class="config-grid">
+                    <div class="config-field">
+                        <label for="base-url">Base URL</label>
+                        <input type="text" id="base-url" class="config-input" value="" placeholder="https://yourdomain.com/index.html">
+                    </div>
+                    <div class="config-field">
+                        <label for="table-prefix">Table Prefix</label>
+                        <input type="text" id="table-prefix" class="config-input" value="T" placeholder="T">
+                    </div>
+                    <div class="config-field">
+                        <label for="num-tables">Number of Tables</label>
+                        <input type="number" id="num-tables" class="config-input" value="10" min="1" max="50">
+                    </div>
+                </div>
+                <div class="config-actions">
+                    <button id="generate-btn" class="btn btn-primary">
+                        <i class="fas fa-qrcode"></i> Generate QR Codes
+                    </button>
+                    <button id="print-all-btn" class="btn btn-outline hidden">
+                        <i class="fas fa-print"></i> Print All
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="qr-output" class="qr-output hidden">
+            <div id="qr-grid" class="qr-grid"></div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="js/qr-generator.js"></script>
+</body>
+</html>
