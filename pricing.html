@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bites & Sips - System Pricing</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Existing Shared Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-primary);
+            color: var(--text-color);
+        }
+
+        .pricing-hero {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .pricing-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .pricing-hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Toggle Switch */
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        .save-badge {
+            background-color: var(--accent);
+            color: #fff;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .4s;
+            border: 2px solid var(--accent);
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: var(--accent);
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Pricing Grid */
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--accent);
+            color: #fff;
+            padding: 0.5rem 2rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(45deg) translate(30%, -150%);
+            width: 150px;
+            text-align: center;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .plan-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-desc {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 2rem;
+            min-height: 40px;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.2rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .plan-features {
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+            flex-grow: 1;
+        }
+
+        .plan-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .plan-features li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .plan-features li.disabled {
+            opacity: 0.4;
+        }
+        
+        .plan-features li.disabled::before {
+            content: "✕";
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-full {
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .pricing-footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-top: auto;
+        }
+
+        .pricing-footer p {
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            .pricing-card.popular:hover {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pricing-hero">
+        <h1>Digitize Your Restaurant</h1>
+        <p>Choose the perfect tier to level up your customer experience and streamline your operations. No hardware required.</p>
+        
+        <div class="billing-toggle">
+            <span id="monthly-label" style="opacity: 1;">Monthly</span>
+            <label class="switch">
+                <input type="checkbox" id="billing-switch" onchange="toggleBilling()">
+                <span class="slider"></span>
+            </label>
+            <span id="yearly-label" style="opacity: 0.5;">Yearly <span class="save-badge">Save 16%</span></span>
+        </div>
+    </div>
+
+    <div class="pricing-container">
+        <!-- Basic Plan -->
+        <div class="pricing-card">
+            <h2 class="plan-name">Basic</h2>
+            <p class="plan-desc">For small cafes and food trucks wanting a stunning digital menu.</p>
+            <div class="plan-price">
+                <span class="currency">EGP</span>
+                <span class="amount" data-monthly="499" data-yearly="4,990">499</span>
+                <span class="period">/ mo</span>
+            </div>
+            
+            <ul class="plan-features">
+                <li>Interactive 3D Digital Menu</li>
+                <li>QR Code Generation</li>
+                <li>"Trial of Anubis" Recommendation Game</li>
+                <li>Mobile-first Responsive Design</li>
+                <li class="disabled">Waiter Dashboard</li>
+                <li class="disabled">Kitchen Display Screen</li>
+                <li class="disabled">Manager Analytics Overview</li>
+                <li class="disabled">Inventory Management</li>
+            </ul>
+            
+            <a href="#" class="btn btn-outline btn-full">Get Started</a>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="pricing-card popular">
+            <div class="popular-badge">Most Popular</div>
+            <h2 class="plan-name">Pro</h2>
+            <p class="plan-desc">For medium-sized restaurants needing table and order management.</p>
+            <div class="plan-price">
+                <span class="currency">EGP</span>
+                <span class="amount" data-monthly="1,499" data-yearly="14,990">1,499</span>
+                <span class="period">/ mo</span>
+            </div>
+            
+            <ul class="plan-features">
+                <li>Interactive 3D Digital Menu</li>
+                <li>QR Code Generation</li>
+                <li>"Trial of Anubis" Recommendation Game</li>
+                <li>Mobile-first Responsive Design</li>
+                <li><strong>Waiter Dashboard</strong> (Table Ordering)</li>
+                <li><strong>Kitchen Display Screen</strong> (Live Orders)</li>
+                <li><strong>Cashier Dashboard</strong> (Checkout Flow)</li>
+                <li class="disabled">Manager Analytics Overview</li>
+                <li class="disabled">Inventory Management</li>
+            </ul>
+            
+            <a href="#" class="btn btn-secondary btn-full">Upgrade to Pro</a>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="pricing-card">
+            <h2 class="plan-name">Enterprise</h2>
+            <p class="plan-desc">For high-end spots requiring full operational oversight and analytics.</p>
+            <div class="plan-price">
+                <span class="currency">EGP</span>
+                <span class="amount" data-monthly="2,999" data-yearly="29,990">2,999</span>
+                <span class="period">/ mo</span>
+            </div>
+            
+            <ul class="plan-features">
+                <li>Interactive 3D Digital Menu</li>
+                <li>QR Code Generation</li>
+                <li>"Trial of Anubis" Recommendation Game</li>
+                <li>Mobile-first Responsive Design</li>
+                <li>Waiter Dashboard</li>
+                <li>Kitchen Display Screen</li>
+                <li>Cashier Dashboard</li>
+                <li><strong>Manager Overview & Analytics</strong></li>
+                <li><strong>Live Inventory Management</strong></li>
+                <li><strong>Priority 24/7 Support</strong></li>
+            </ul>
+            
+            <a href="#" class="btn btn-primary btn-full">Contact Sales</a>
+        </div>
+    </div>
+
+    <div class="pricing-footer">
+        <h3>Prefer a one-time payment?</h3>
+        <p>We offer white-label custom installations for a one-time setup fee starting at <strong>15,000 EGP</strong>. You own the software and host it on your own terms (requires minor annual maintenance fee).</p>
+        <a href="mailto:sales@bitesandsips.com" class="btn btn-outline">Inquire About One-Time Setup</a>
+    </div>
+
+    <script>
+        function toggleBilling() {
+            const isYearly = document.getElementById('billing-switch').checked;
+            const amounts = document.querySelectorAll('.amount');
+            const periods = document.querySelectorAll('.period');
+            
+            // Update labels opacity
+            document.getElementById('monthly-label').style.opacity = isYearly ? '0.5' : '1';
+            document.getElementById('yearly-label').style.opacity = isYearly ? '1' : '0.5';
+
+            // Animate numbers
+            amounts.forEach(amount => {
+                amount.style.opacity = 0;
+                setTimeout(() => {
+                    amount.innerText = isYearly ? amount.getAttribute('data-yearly') : amount.getAttribute('data-monthly');
+                    amount.style.opacity = 1;
+                }, 200);
+            });
+
+            // Update periods
+            periods.forEach(period => {
+                period.style.opacity = 0;
+                setTimeout(() => {
+                    period.innerText = isYearly ? '/ yr' : '/ mo';
+                    period.style.opacity = 1;
+                }, 200);
+            });
+        }
+    </script>
+</body>
+</html>
