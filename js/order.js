@@ -9,7 +9,7 @@ const OrderManager = (() => {
     let selectedTip = 0; // percentage
     let tableNumber = 'Walk-in';
 
-    const API_BASE_URL = 'http://10.89.147.9:4000'; // Local Network IP
+    const API_BASE_URL = 'https://bits-and-sipsbackend-production.up.railway.app'; // Railway Production URL
 
     // ─── Table URL System ────────────────────────────────────
     function initTable() {

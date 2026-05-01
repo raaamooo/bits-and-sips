@@ -6,7 +6,7 @@ const DashboardShared = (() => {
     const ORDERS_KEY = 'bitsAndSipsOrders';
     const COUNTER_KEY = 'bitsAndSipsOrderCounter';
     const THEME_KEY = 'dashboardTheme';
-    const API_BASE_URL = 'http://10.89.147.9:4000'; // Local Network IP
+    const API_BASE_URL = 'https://bits-and-sipsbackend-production.up.railway.app'; // Railway Production URL
 
     let cachedOrders = [];
 
