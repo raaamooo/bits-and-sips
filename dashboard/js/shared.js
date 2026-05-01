@@ -6,7 +6,7 @@ const DashboardShared = (() => {
     const ORDERS_KEY = 'bitsAndSipsOrders';
     const COUNTER_KEY = 'bitsAndSipsOrderCounter';
     const THEME_KEY = 'dashboardTheme';
-    const API_BASE_URL = 'https://amber-bean-api-production.up.railway.app'; // Change to Render URL when deployed
+    const API_BASE_URL = 'https://railway.com/project/e1fc22e4-e56b-45ad-a782-8418306ef516/service/824afa41-d50e-4dd4-b823-ce53c9673c7e/settings?environmentId=b782b489-5efc-4971-81f0-fbf61f48ba9c'; // Change to Render URL when deployed
 
     let cachedOrders = [];
 
